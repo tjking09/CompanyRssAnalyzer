@@ -10,7 +10,7 @@ namespace CompanyRssAnalyzer
 {
     class CompanyClass
     {
-        public void FindInactiveCompanies(Dictionary<string, string> companyDictionary, int daysBack)
+        public void FindInactiveCompanies(Dictionary<string, List<string>> companyDictionary, int daysBack)
         {
             // Set date check to go back in time
             daysBack *= -1;

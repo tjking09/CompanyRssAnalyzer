@@ -15,17 +15,12 @@ namespace CompanyRssAnalyzer
 
             // initialize our company class instance that will include method to determine company activity
             var instance = new CompanyClass();
+            var dictionaryInstance = new CompanyDictionaryClass();
 
-            // Company Dictionary decloration
-            Dictionary<string, string> CompanyDictionary = new Dictionary<string, string>
-            {
-                { "ESPN", "https://www.espn.com/espn/rss/news" },
-                { "Bill Simmons Podcast", "https://rss.art19.com/the-bill-simmons-podcast" },
-                { "Hacker News", "https://hnrss.org/newest" }
-            };
+            dictionaryInstance.Add("ESPN", "https://www.espn.com/espn/rss/nhl/news");
 
             // Call method in CompanyClass to determine which companies have not published without our set check period
-            instance.FindInactiveCompanies(CompanyDictionary, daysBack); 
+            instance.FindInactiveCompanies(dictionaryInstance.CompanyDictionary, daysBack); 
 
             // Remove before submission - used for debugging
             Console.ReadLine();
