@@ -20,35 +20,38 @@ namespace CompanyRssAnalyzer
             Console.WriteLine($"Check Date: {checkDate}");
 
             // iterate through the dictionary to determine whether the feeds have recent activity
-            foreach (KeyValuePair<string, string> entry in companyDictionary)
+            foreach (KeyValuePair<string, List<string>> entry in companyDictionary)
             {
-                // Start reading RSS XML
-                XmlReader reader = XmlReader.Create(entry.Value);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
-                reader.Close();
-
-                // Print company name for debugging purposes
-                Console.WriteLine($"\n{entry.Key}");
-
-                // Run through the RSS feed items
-                foreach (SyndicationItem item in feed.Items)
+                for (int i = 0; i < companyDictionary.Values.Count; i++)
                 {
-                    // Grab the date of the most recent published item
-                    DateTime lastUpdated = item.PublishDate.Date;
+                    // Start reading RSS XML
+                    XmlReader reader = XmlReader.Create(entry.Value[i]);
+                    SyndicationFeed feed = SyndicationFeed.Load(reader);
+                    reader.Close();
 
-                    // Determine whether the last publish date is within our check date
-                    if (lastUpdated != null)
+                    // Print company name for debugging purposes
+                    Console.WriteLine($"\n{entry.Key}");
+
+                    // Run through the RSS feed items
+                    foreach (SyndicationItem item in feed.Items)
                     {
-                        Console.WriteLine($"Last Updated: {lastUpdated}");
-                        if (lastUpdated > checkDate)
+                        // Grab the date of the most recent published item
+                        DateTime lastUpdated = item.PublishDate.Date;
+
+                        // Determine whether the last publish date is within our check date
+                        if (lastUpdated != null)
                         {
-                            Console.WriteLine("It is up to date");
+                            Console.WriteLine($"Last Updated: {lastUpdated}");
+                            if (lastUpdated > checkDate)
+                            {
+                                Console.WriteLine("It is up to date");
+                            }
+                            else
+                            {
+                                Console.WriteLine("It hasn't been updated lately");
+                            }
+                            break;
                         }
-                        else
-                        {
-                            Console.WriteLine("It hasn't been updated lately");
-                        }
-                        break;
                     }
                 }
             }

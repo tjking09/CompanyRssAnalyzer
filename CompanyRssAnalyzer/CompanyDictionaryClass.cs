@@ -14,7 +14,7 @@ namespace CompanyRssAnalyzer
         {
             if (this.CompanyDictionary.ContainsKey(key))
             {
-                List<string> list = this.CompanyDictionary[key];
+                List<string> list = CompanyDictionary[key];
                 if(list.Contains(value) == false)
                 {
                     list.Add(value);
