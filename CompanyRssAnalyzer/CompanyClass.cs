@@ -29,6 +29,28 @@ namespace CompanyRssAnalyzer
 
                 // Print company name for debugging purposes
                 Console.WriteLine($"\n{entry.Key}");
+
+                // Run through the RSS feed items
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    // Grab the date of the most recent published item
+                    DateTime lastUpdated = item.PublishDate.Date;
+
+                    // Determine whether the last publish date is within our check date
+                    if (lastUpdated != null)
+                    {
+                        Console.WriteLine($"Last Updated: {lastUpdated}");
+                        if (lastUpdated > checkDate)
+                        {
+                            Console.WriteLine("It is up to date");
+                        }
+                        else
+                        {
+                            Console.WriteLine("It hasn't been updated lately");
+                        }
+                        break;
+                    }
+                }
             }
         }
     }

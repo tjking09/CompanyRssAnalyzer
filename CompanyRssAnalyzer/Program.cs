@@ -10,7 +10,7 @@ namespace CompanyRssAnalyzer
     {
         static void Main(string[] args)
         {
-            // Set variable for how many days back we want to check for activity
+            // Set variable for how many days back, from today, we want to check for activity
             int daysBack = 2;
 
             // initialize our company class instance that will include method to determine company activity
@@ -23,6 +23,9 @@ namespace CompanyRssAnalyzer
                 { "Bill Simmons Podcast", "https://rss.art19.com/the-bill-simmons-podcast" },
                 { "Hacker News", "https://hnrss.org/newest" }
             };
+
+            // Call method in CompanyClass to determine which companies have not published without our set check period
+            instance.FindInactiveCompanies(CompanyDictionary, daysBack); 
 
             // Remove before submission - used for debugging
             Console.ReadLine();
