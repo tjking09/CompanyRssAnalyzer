@@ -10,8 +10,11 @@ namespace CompanyRssAnalyzer
 {
     class CompanyClass
     {
-        public void FindInactiveCompanies(Dictionary<string, List<string>> companyDictionary, int daysBack)
+        public List<string> FindInactiveCompanies(Dictionary<string, List<string>> companyDictionary, int daysBack)
         {
+            // Initialize new list to store companies without recent activity]
+            List<string> InactiveCompanies = new List<string>();
+
             // Set date check to go back in time
             daysBack *= -1;
             DateTime checkDate = DateTime.Now.AddDays(daysBack);
@@ -49,12 +52,14 @@ namespace CompanyRssAnalyzer
                             else
                             {
                                 Console.WriteLine("It hasn't been updated lately");
+                                InactiveCompanies.Add(entry.Key);
                             }
                             break;
                         }
                     }
                 }
             }
+            return InactiveCompanies;
         }
     }
 }

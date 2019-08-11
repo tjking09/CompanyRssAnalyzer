@@ -17,10 +17,12 @@ namespace CompanyRssAnalyzer
             var instance = new CompanyClass();
             var dictionaryInstance = new CompanyDictionaryClass();
 
+            // Debugging purposes to check dictionary functionality
             dictionaryInstance.Add("ESPN", "https://www.espn.com/espn/rss/nhl/news");
 
             // Call method in CompanyClass to determine which companies have not published without our set check period
-            instance.FindInactiveCompanies(dictionaryInstance.CompanyDictionary, daysBack); 
+            List<string> results = new List<string>();
+            results = instance.FindInactiveCompanies(dictionaryInstance.CompanyDictionary, daysBack); 
 
             // Remove before submission - used for debugging
             Console.ReadLine();
