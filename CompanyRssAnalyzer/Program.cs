@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompanyRssAnalyzer
 {
@@ -22,7 +19,14 @@ namespace CompanyRssAnalyzer
 
             // Call method in CompanyClass to determine which companies have not published without our set check period
             List<string> results = new List<string>();
-            results = instance.FindInactiveCompanies(dictionaryInstance.CompanyDictionary, daysBack); 
+            results = instance.FindInactiveCompanies(dictionaryInstance.CompanyDictionary, daysBack);
+
+
+            Console.WriteLine($"List of Companies:");
+            foreach (var r in results)
+            {
+                Console.WriteLine($"{r}\n");
+            }
 
             // Remove before submission - used for debugging
             Console.ReadLine();
